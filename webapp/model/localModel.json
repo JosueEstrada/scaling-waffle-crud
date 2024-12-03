@@ -1,0 +1,37 @@
+{
+    "isEditing": false,
+    "listado": [
+        {
+            "material": "Planchas de Acero",
+            "descripcion": "Metal resistente y ductil",
+            "cantidad": 20,
+            "peso": 900,
+            "unidadesKey": "1",
+            "unidades": "Kilogramos"
+        },
+        {
+            "material": "Bolsa de Cemento",
+            "descripcion": "Cemento tipo I",
+            "cantidad": 50,
+            "peso": 2000,
+            "unidadesKey": "1",
+            "unidades": "Kilogramos"
+        },
+        {
+            "material": "Bidon de Acero",
+            "descripcion": "Recipiente",
+            "cantidad": 20,
+            "peso": 2,
+            "unidadesKey": "2",
+            "unidades": "Toneladas"
+        },
+        {
+            "material": "Ladrillos",
+            "descripcion": "Ladrillos pandereta",
+            "cantidad": 2000,
+            "peso": 1,
+            "unidadesKey": "2",
+            "unidades": "Toneladas"
+        }
+    ]
+}

@@ -1,0 +1,157 @@
+<mvc:View
+    controllerName="appdemo.test.controller.Main"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+    >
+        <f:SimpleForm
+            id="SimpleForm"
+            editable="true"
+            layout="ResponsiveGridLayout"
+            title="Ingreso de materiales"
+            labelSpanXL="3"
+            labelSpanL="3"
+            labelSpanM="3"
+            labelSpanS="12"
+            adjustLabelSpan="false"
+            emptySpanXL="4"
+            emptySpanL="4"
+            emptySpanM="4"
+            emptySpanS="0"
+            columnsXL="1"
+            columnsL="1"
+            columnsM="1"
+            singleContainerFullSize="false"
+        >
+            <f:content>
+                <Label text="Material" />
+                <Input
+                    id="nameMaterial"
+                    value="{localModel>/formMate}"
+                />
+                <Label text="Descripción" />
+                <Input value="{localModel>/formDesc}" />
+                <Label text="Cantidad" />
+                <Input
+                    value="{localModel>/formCant}"
+                    type="Number"
+                />
+                <Label text="Peso" />
+                <Input
+                    value="{localModel>/formPeso}"
+                    type="Number"
+                />
+                <Select
+                    id="unidades"
+                    selectedKey="{localModel>/formUnid}"
+                    forceSelection="false"
+                >
+                    <items>
+                        <core:Item
+                            text="Kilogramos"
+                            key="Kilogramos"
+                        />
+                        <core:Item
+                            text="gramos"
+                            key="gramos"
+                        />
+                        <core:Item
+                            text="Libras"
+                            key="Libras"
+                        />
+                        <core:Item
+                            text="Toneladas"
+                            key="Toneladas"
+                        />
+                    </items>
+                </Select>
+            </f:content>
+        </f:SimpleForm>
+        <Bar>
+            <contentMiddle>
+                <Button
+                    id="save"
+                    text="Guardar"
+                    type="Emphasized"
+                    visible="true"
+                    press="onSave"
+                    icon="sap-icon://save"
+                />
+                <Button
+                    id="cancel"
+                    text="Cancelar"
+                    type="Attention"
+                    visible="{localModel>/isEditing}"
+                    press="onCancel"
+                    icon="sap-icon://cancel"
+                />
+            </contentMiddle>
+        </Bar>
+
+        <Table items="{localModel>/listado}">
+            <headerToolbar>
+                <OverflowToolbar>
+                    <Title
+                        text="Listado de Materiales"
+                        level="H2"
+                    />
+                    <ToolbarSpacer />
+                </OverflowToolbar>
+            </headerToolbar>
+            <columns>
+                <Column>
+                    <Text text="Material" />
+                </Column>
+                <Column>
+                    <Text text="Descripción" />
+                </Column>
+                <Column>
+                    <Text text="Cantidad" />
+                </Column>
+                <Column>
+                    <Text text="Peso" />
+                </Column>
+                <Column>
+                    <Text text="Unidades" />
+                </Column>
+                <Column>
+                    <Text text="Acciones" />
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem vAlign="Middle">
+                    <cells>
+                        <Text text="{localModel>material}" />
+                        <Text text="{localModel>descripcion}" />
+                        <Text text="{localModel>cantidad}" />
+                        <Text text="{localModel>peso}" />
+                        <Text text="{localModel>unidades}" />
+                        <FlexBox
+                            justifyContent="SpaceAround"
+                            wrap="Wrap"
+                        >
+                            <Button
+                                text="Editar"
+                                press="onEdit"
+                                icon="sap-icon://edit"
+                            />
+                            <Button
+                                text="Eliminar"
+                                press="onDelete"
+                                icon="sap-icon://delete"
+                                type="Reject"
+                                enabled="{= !${localModel>/isEditing}}"
+                            />
+                        </FlexBox>
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </Page>
+</mvc:View>
