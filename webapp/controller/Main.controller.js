@@ -1,7 +1,8 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/m/MessageToast"
-], (Controller, MessageToast) => {
+    "sap/m/MessageToast",
+    "sap/m/MessageBox",
+], (Controller, MessageToast, MessageBox) => {
     "use strict";
 
     return Controller.extend("appdemo.test.controller.Main", {
@@ -91,13 +92,26 @@ sap.ui.define([
             let oContext = oEvent.getSource().getBindingContext("localModel");
             let path = oContext.getPath();
             let miLista = this.localModel.getProperty("/listado");
-            let index = parseInt(path.split("/")[2], 10);
-            miLista.splice(index, 1);
-            MessageToast.show("Registro eliminado");
-
-            this.localModel.setProperty("/listado", miLista);
-            this.localModel.refresh();
-
+            let oModel = this.localModel;
+            MessageBox.warning("¿Eliminar registro?", {
+                title: "Confirmación",
+                icon: MessageBox.Icon.WARNING,
+                actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
+                emphasizedAction: MessageBox.Action.OK,
+                onClose: function (oAction) {
+                    if (oAction === MessageBox.Action.OK) {
+                        let index = parseInt(path.split("/")[2], 10);
+                        console.log("path: ", path);
+                        miLista.splice(index, 1);
+                        // Scope? 
+                        //this.localModel.refresh();
+                        //this.localModel.setProperty("/listado", miLista);
+                        oModel.setProperty("/listado", miLista);
+                        oModel.refresh();
+                        MessageToast.show("Registro eliminado");
+                    }
+                }
+            });
         },
 
         onCancel: function () {
