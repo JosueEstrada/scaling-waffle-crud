@@ -1,6 +1,7 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-], (Controller) => {
+    "sap/m/MessageToast"
+], (Controller, MessageToast) => {
     "use strict";
 
     return Controller.extend("appdemo.test.controller.Main", {
@@ -44,6 +45,7 @@ sap.ui.define([
                 this.localModel.setProperty(this.path + "/unidades", unidades);
 
                 this.path = null;
+                MessageToast.show("Registro modificado");
             } else {
 
 
@@ -53,6 +55,7 @@ sap.ui.define([
                 // Agregar el formulario a modelo
                 miLista.push(miFormulario);
 
+                MessageToast.show("Registro agregado");
                 this.localModel.setProperty("/listado", miLista);
             }
 
@@ -64,7 +67,6 @@ sap.ui.define([
             this.localModel.setProperty("/formUnid", "");
 
             this.localModel.setProperty("/isEditing", false);
-
 
             this.localModel.refresh();
         },
@@ -91,6 +93,7 @@ sap.ui.define([
             let miLista = this.localModel.getProperty("/listado");
             let index = parseInt(path.split("/")[2], 10);
             miLista.splice(index, 1);
+            MessageToast.show("Registro eliminado");
 
             this.localModel.setProperty("/listado", miLista);
             this.localModel.refresh();
